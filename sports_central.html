@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d18">
+<title>Sports Central</title>
+<style>
+:root{--bg:#080d18;--panel:#111a2a;--panel2:#172338;--line:#26354d;--text:#f4f7fb;--muted:#9aa9bf;--blue:#4c9aff;--green:#35d39a;--red:#ff6577;--gold:#ffc857}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% -10%,#182b4b 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1250px;margin:auto;padding:22px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:8px 0 24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#2e8cff,#7b5cff);display:grid;place-items:center;font-size:24px;font-weight:900;box-shadow:0 8px 28px #246bcb55}.brand h1{font-size:25px;letter-spacing:-.8px;margin:0}.brand p{margin:0;color:var(--muted);font-size:12px}.header-actions{display:flex;gap:9px;align-items:center}.pill,.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 13px;border-radius:10px}.btn.primary{background:var(--blue);border-color:var(--blue);color:#061426;font-weight:800}.btn:hover,.pill:hover{border-color:var(--blue)}.status{color:var(--muted);font-size:12px}
+.hero{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:18px}.hero h2{font-size:30px;letter-spacing:-1px;margin:0}.hero p{margin:4px 0 0;color:var(--muted)}.date-controls{display:flex;gap:7px;align-items:center}.date-controls input{color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:8px}
+.tabs{display:flex;gap:7px;overflow:auto;border-bottom:1px solid var(--line);margin-bottom:18px}.tab{border:0;background:transparent;color:var(--muted);padding:12px 15px;border-bottom:2px solid transparent;white-space:nowrap}.tab.active{color:white;border-color:var(--blue);font-weight:800}
+.toolbar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:16px 0}.toolbar select,.toolbar input,.form-grid input,.form-grid select{background:#0c1422;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:10px}.toggle{display:flex;gap:8px;align-items:center;background:var(--panel);border:1px solid var(--line);padding:8px 12px;border-radius:10px;color:var(--muted)}.toggle input{accent-color:var(--blue)}
+.sport-chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 18px}.chip{background:var(--panel);color:var(--muted);border:1px solid var(--line);padding:7px 11px;border-radius:99px;font-size:12px}.chip.active{background:#17365d;border-color:#397cc8;color:#fff}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:20px 0 10px}.section-head h3{margin:0;font-size:17px}.count{color:var(--muted);font-size:12px}
+.games{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.game{background:linear-gradient(145deg,var(--panel),#0e1726);border:1px solid var(--line);border-radius:15px;padding:15px;min-width:0}.game-top{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:11px;margin-bottom:13px}.league{font-weight:800;letter-spacing:.5px;color:#c3d4eb}.live{color:var(--red);font-weight:900}.final{color:var(--muted)}.team-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:7px 0}.team-name{font-weight:750;overflow-wrap:anywhere}.team-detail{font-size:11px;color:var(--muted)}.score{font-size:23px;font-weight:900;font-variant-numeric:tabular-nums}.game-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:10px;margin-top:9px;color:var(--muted);font-size:11px}.star{border:0;background:transparent;color:#71839e;font-size:21px;padding:0 3px}.star.on{color:var(--gold)}.empty{border:1px dashed var(--line);border-radius:14px;padding:35px;text-align:center;color:var(--muted);grid-column:1/-1}.loading{padding:24px;color:var(--muted);text-align:center}.error-note{background:#3a2028;border:1px solid #693440;color:#ffc5ce;padding:12px;border-radius:10px;margin:10px 0;font-size:12px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px;margin:15px 0}.panel h3{margin:0 0 5px}.panel p{margin:0;color:var(--muted);font-size:13px}.form-grid{display:grid;grid-template-columns:1.1fr 1.4fr 1fr 1.5fr auto;gap:8px;margin-top:14px}.link-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:15px}.custom-link{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#0c1422;border:1px solid var(--line);border-radius:12px;padding:13px}.custom-link a{color:#9bcaff;text-decoration:none;font-weight:750}.custom-link a:hover{text-decoration:underline}.custom-link small{display:block;color:var(--muted);font-size:11px}.delete{background:transparent;border:0;color:#ff8290;font-size:18px}
+.note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:18px}.footer{border-top:1px solid var(--line);margin-top:28px;padding:18px 0;color:var(--muted);font-size:11px}
+.hidden{display:none!important}
+@media(max-width:760px){.shell{padding:15px}.hero{align-items:flex-start;flex-direction:column}.hero h2{font-size:26px}.games,.link-list{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr 1fr}.form-grid button{grid-column:1/-1}.header-actions .status{display:none}.brand h1{font-size:22px}}
+@media(max-width:420px){.form-grid{grid-template-columns:1fr}.form-grid button{grid-column:auto}.date-controls{width:100%}.date-controls input{flex:1;min-width:0}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+ <div class="brand"><div class="logo">SC</div><div><h1>Sports Central</h1><p>scores • schedules • your teams</p></div></div>
+ <div class="header-actions"><span class="status" id="lastUpdated">Waiting for scores…</span><button class="btn" id="refreshBtn">↻ Refresh</button></div>
+</header>
+<div class="hero"><div><h2>Your sports. One scoreboard.</h2><p>Live games, upcoming matchups, results, and your personal game links.</p></div>
+ <div class="date-controls"><button class="btn" id="prevDay">‹</button><input type="date" id="datePicker"><button class="btn" id="nextDay">›</button><button class="btn" id="todayBtn">Today</button></div>
+</div>
+<nav class="tabs">
+ <button class="tab active" data-tab="scores">Scores & Schedule</button>
+ <button class="tab" data-tab="favorites">Favorite Teams</button>
+ <button class="tab" data-tab="links">My Game Links</button>
+</nav>
+<section id="scoresPage">
+ <div class="toolbar">
+  <select id="viewFilter"><option value="all">All games</option><option value="live">Live now</option><option value="upcoming">Upcoming</option><option value="final">Final scores</option></select>
+  <label class="toggle"><input type="checkbox" id="favoritesOnly"> Show favorite teams only</label>
+  <select id="leagueFilter"><option value="all">All leagues</option></select>
+ </div>
+ <div class="sport-chips" id="sportChips"></div>
+ <div id="gamesArea"><div class="loading">Loading games and scores…</div></div>
+</section>
+<section id="favoritesPage" class="hidden">
+ <div class="section-head"><h3>Your followed teams</h3><span class="count" id="favoriteCount">0 teams</span></div>
+ <div class="panel"><p>Tap the ☆ on any team in the scoreboard to follow it. This page shows games involving your followed teams.</p></div>
+ <div id="favoriteGames" class="games"></div>
+</section>
+<section id="linksPage" class="hidden">
+ <div class="panel">
+  <h3>Your personal game links</h3>
+  <p>Save links to official broadcasts, team streams, radio calls, live blogs, or other game pages. These links are separate from the scoreboard and stay saved in this browser.</p>
+  <form id="linkForm" class="form-grid">
+   <input id="linkName" placeholder="Link name (e.g. LBSU vs UCLA)" required maxlength="80">
+   <input id="linkUrl" type="url" placeholder="https://…" required>
+   <select id="linkSport"><option>NBA</option><option>NFL</option><option>Soccer</option><option>CBB</option><option>NCAA Men's Volleyball</option><option>NCAA Women's Volleyball</option><option>UFC</option><option>Other</option></select>
+   <input id="linkNote" placeholder="Optional note (channel, game date…)">
+   <button class="btn primary" type="submit">＋ Add link</button>
+  </form>
+  <div id="linkMessage" class="note"></div>
+ </div>
+ <div class="section-head"><h3>Saved links</h3><span class="count" id="linkCount">0 links</span></div>
+ <div id="customLinks" class="link-list"></div>
+</section>
+<div class="note">Score data is requested from ESPN's publicly accessible scoreboard feeds. Coverage and update timing vary by sport and competition. UFC listings may show event schedules/results rather than live round-by-round scoring. Custom links are saved only in this browser.</div>
+<div class="footer">SPORTS CENTRAL · Independent fan dashboard · Not affiliated with ESPN, the NCAA, UFC, or any league.</div>
+</div>
+<script>
+const LEAGUES = [
+ {sport:"NBA",name:"NBA",path:"basketball/nba"},
+ {sport:"NFL",name:"NFL",path:"football/nfl"},
+ {sport:"Soccer",name:"Premier League",path:"soccer/eng.1"},
+ {sport:"Soccer",name:"LaLiga",path:"soccer/esp.1"},
+ {sport:"Soccer",name:"Bundesliga",path:"soccer/ger.1"},
+ {sport:"Soccer",name:"Serie A",path:"soccer/ita.1"},
+ {sport:"Soccer",name:"Ligue 1",path:"soccer/fra.1"},
+ {sport:"Soccer",name:"MLS",path:"soccer/usa.1"},
+ {sport:"Soccer",name:"UEFA Champions League",path:"soccer/uefa.champions"},
+ {sport:"CBB",name:"Men's College Basketball",path:"basketball/mens-college-basketball"},
+ {sport:"CBB",name:"Women's College Basketball",path:"basketball/womens-college-basketball"},
+ {sport:"NCAA Men's Volleyball",name:"NCAA Men's Volleyball",path:"volleyball/mens-college-volleyball"},
+ {sport:"NCAA Women's Volleyball",name:"NCAA Women's Volleyball",path:"volleyball/womens-college-volleyball"},
+ {sport:"UFC",name:"UFC / MMA",path:"mma/ufc"}
+];
+const SPORTS=["All","NBA","NFL","Soccer","CBB","NCAA Men's Volleyball","NCAA Women's Volleyball","UFC"];
+let selectedSport="All", games=[], selectedDate=new Date(), currentTab="scores";
+let favorites=JSON.parse(localStorage.getItem("sc_favorites")||"[]");
+let customLinks=JSON.parse(localStorage.getItem("sc_custom_links")||"[]");
+const $=id=>document.getElementById(id);
+const dateKey=d=>`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;
+const safe=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function saveFavorites(){localStorage.setItem("sc_favorites",JSON.stringify(favorites))}
+function saveLinks(){localStorage.setItem("sc_custom_links",JSON.stringify(customLinks))}
+function setDate(d){selectedDate=new Date(d);$("datePicker").value=`${selectedDate.getFullYear()}-${String(selectedDate.getMonth()+1).padStart(2,"0")}-${String(selectedDate.getDate()).padStart(2,"0")}`;loadScores()}
+function eventState(e){let c=e.status?.type?.completed;let state=e.status?.type?.state;return c?"final":state==="in"?"live":"upcoming"}
+function fmtTime(e){let s=e.status?.type?.shortDetail||e.status?.type?.detail||"";if(s)return s;try{return new Date(e.date).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}catch{return ""}}
+function normalizeEvent(e,league,sport){
+ let comp=e.competitions?.[0]||{}, competitors=comp.competitors||[];
+ let home=competitors.find(t=>t.homeAway==="home")||competitors[0]||{}, away=competitors.find(t=>t.homeAway==="away")||competitors[1]||{};
+ const isMMA=sport==="UFC";
+ let name=e.name||e.shortName||"UFC event";
+ return {id:`${league.path}-${e.id}`,league:league.name,sport,date:e.date,state:eventState(e),clock:fmtTime(e),
+  homeName:isMMA?(name):(home.team?.displayName||home.team?.name||"TBD"),
+  awayName:isMMA?"":(away.team?.displayName||away.team?.name||"TBD"),
+  homeScore:home.score??"",awayScore:away.score??"",homeId:home.team?.id||"",awayId:away.team?.id||"",
+  detail:isMMA?(e.status?.type?.detail||comp.venue?.fullName||"Fight card / event"):(comp.venue?.fullName||comp.broadcasts?.map(b=>b.names?.join(", ")).filter(Boolean).join(" · ")||""),
+  isMMA, raw:e};
+}
+async function fetchLeague(league){
+ const url=`https://site.api.espn.com/apis/site/v2/sports/${league.path}/scoreboard?dates=${dateKey(selectedDate)}&limit=100`;
+ try{const r=await fetch(url);if(!r.ok)throw Error(r.status);const data=await r.json();return (data.events||[]).map(e=>normalizeEvent(e,league,league.sport))}
+ catch(err){return {error:league.name}}
+}
+async function loadScores(){
+ $("gamesArea").innerHTML='<div class="loading">Loading scores from leagues…</div>';
+ const results=await Promise.all(LEAGUES.map(fetchLeague));
+ const errors=results.filter(x=>!Array.isArray(x));
+ games=results.flatMap(x=>Array.isArray(x)?x:[]);
+ games.sort((a,b)=>{const order={live:0,upcoming:1,final:2};return order[a.state]-order[b.state]||new Date(a.date)-new Date(b.date)});
+ $("lastUpdated").textContent=`Updated ${new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}`;
+ if(errors.length){$("gamesArea").dataset.errors=errors.map(x=>x.error).join(", ")}else delete $("gamesArea").dataset.errors;
+ renderAll();
+}
+function gameMatchesFavorites(g){return favorites.includes(String(g.homeId))||favorites.includes(String(g.awayId))||favorites.includes(`name:${g.homeName}`)||favorites.includes(`name:${g.awayName}`)}
+function teamRow(name,score,id,detail){
+ const key=id?String(id):`name:${name}`,on=favorites.includes(key);
+ return `<div class="team-row"><div><div class="team-name">${safe(name)}</div>${detail?`<div class="team-detail">${safe(detail)}</div>`:""}</div><div style="display:flex;align-items:center;gap:9px"><span class="score">${score===""?"—":safe(score)}</span><button class="star ${on?"on":""}" title="${on?"Unfollow":"Follow"} ${safe(name)}" onclick="toggleFavorite('${safe(key)}')">${on?"★":"☆"}</button></div></div>`;
+}
+function gameCard(g){
+ let stateLabel=g.state==="live"?`<span class="live">● LIVE ${safe(g.clock)}</span>`:g.state==="final"?`<span class="final">FINAL</span>`:`<span>${safe(g.clock)}</span>`;
+ let body=g.isMMA?`<div class="team-row"><div><div class="team-name">${safe(g.homeName)}</div><div class="team-detail">Event listing</div></div><span class="team-detail">UFC</span></div>`:
+ `${teamRow(g.awayName,g.awayScore,g.awayId)}${teamRow(g.homeName,g.homeScore,g.homeId)}`;
+ return `<article class="game"><div class="game-top"><span class="league">${safe(g.league)}</span>${stateLabel}</div>${body}<div class="game-bottom"><span>${safe(g.detail||"Schedule")}</span><span>${new Date(g.date).toLocaleDateString([],{month:"short",day:"numeric"})}</span></div></article>`;
+}
+function renderGames(list,target){
+ const area=$(target);if(!list.length){area.innerHTML='<div class="empty">No games found for this selection and date. Try another date or sport.</div>';return}
+ area.innerHTML=list.map(gameCard).join("");
+}
+function renderAll(){
+ let list=games.filter(g=>selectedSport==="All"||g.sport===selectedSport);
+ const lf=$("leagueFilter").value;if(lf!=="all")list=list.filter(g=>g.league===lf);
+ const vf=$("viewFilter").value;if(vf!=="all")list=list.filter(g=>g.state===vf);
+ if($("favoritesOnly").checked)list=list.filter(gameMatchesFavorites);
+ renderGames(list,"gamesArea");
+ const errs=$("gamesArea").dataset.errors;if(errs){$("gamesArea").insertAdjacentHTML("afterbegin",`<div class="error-note">Some feeds could not be reached: ${safe(errs)}. Other leagues may still load.</div>`)}
+ renderFavorites();
+}
+function renderFavorites(){
+ const favGames=games.filter(gameMatchesFavorites);
+ $("favoriteCount").textContent=`${favorites.length} followed`;
+ renderGames(favGames,"favoriteGames");
+}
+function toggleFavorite(key){
+ favorites=favorites.includes(key)?favorites.filter(x=>x!==key):[...favorites,key];saveFavorites();renderAll();
+}
+function renderChips(){
+ $("sportChips").innerHTML=SPORTS.map(s=>`<button class="chip ${s===selectedSport?"active":""}" onclick="chooseSport('${safe(s)}')">${safe(s)}</button>`).join("");
+}
+function chooseSport(s){selectedSport=s;renderChips();const opts=LEAGUES.filter(l=>s==="All"||l.sport===s).map(l=>l.name);$("leagueFilter").innerHTML='<option value="all">All leagues</option>'+opts.map(x=>`<option>${safe(x)}</option>`).join("");renderAll()}
+function showTab(tab){
+ currentTab=tab;document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+ ["scores","favorites","links"].forEach(x=>$(x+"Page").classList.toggle("hidden",x!==tab));
+ if(tab==="links")renderLinks();
+}
+function renderLinks(){
+ $("linkCount").textContent=`${customLinks.length} links`;
+ $("customLinks").innerHTML=customLinks.length?customLinks.map((l,i)=>`<div class="custom-link"><div><a href="${safe(l.url)}" target="_blank" rel="noopener noreferrer">${safe(l.name)}</a><small>${safe(l.sport)}${l.note?" · "+safe(l.note):""}</small></div><button class="delete" title="Delete link" onclick="deleteLink(${i})">×</button></div>`).join(""):'<div class="empty" style="grid-column:1/-1">No saved links yet. Add a game or broadcast link above.</div>';
+}
+function deleteLink(i){customLinks.splice(i,1);saveLinks();renderLinks()}
+$("linkForm").addEventListener("submit",e=>{
+ e.preventDefault();const name=$("linkName").value.trim(),url=$("linkUrl").value.trim();
+ try{const parsed=new URL(url);if(!["http:","https:"].includes(parsed.protocol))throw Error()}
+ catch{$("linkMessage").textContent="Please enter a valid http or https link.";return}
+ customLinks.unshift({name,url,sport:$("linkSport").value,note:$("linkNote").value.trim()});
+ saveLinks();$("linkForm").reset();$("linkMessage").textContent="Link saved in this browser.";renderLinks();
+});
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+$("refreshBtn").onclick=loadScores;$("prevDay").onclick=()=>setDate(new Date(selectedDate.getTime()-86400000));$("nextDay").onclick=()=>setDate(new Date(selectedDate.getTime()+86400000));$("todayBtn").onclick=()=>setDate(new Date());
+$("datePicker").onchange=e=>{if(e.target.value)setDate(new Date(e.target.value+"T12:00:00"))};
+$("viewFilter").onchange=renderAll;$("leagueFilter").onchange=renderAll;$("favoritesOnly").onchange=renderAll;
+renderChips();chooseSport("All");setDate(new Date());
+setInterval(loadScores,60000);
+</script>
+</body></html>
